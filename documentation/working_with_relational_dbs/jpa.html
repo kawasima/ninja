@@ -580,12 +580,12 @@ for an exhaustive coverage of the topic.</p><p>Well. We configured the stuff - w
 Guice and especially Guice Persist (<a href="https://github.com/google/guice/wiki/GuicePersist)">https://github.com/google/guice/wiki/GuicePersist)</a>.</p><p>Ninja just offers a convenient out of the box configuration and maps the modes to the persistence units.</p><p>Let&rsquo;s have a look at a controller that does some querying:</p>
 <pre class="prettyprint">
 @Inject 
-Provider&lt;EntityManager&gt; entitiyManagerProvider;
+Provider&lt;EntityManager&gt; entityManagerProvider;
 
 @UnitOfWork
 public Result getIndex() {
 
-    EntityManager entityManager = entitiyManagerProvider.get();
+    EntityManager entityManager = entityManagerProvider.get();
 
     Query q = entityManager.createQuery(&quot;SELECT x FROM GuestbookEntry x&quot;);
     List&lt;GuestbookEntry&gt; guestbookEntries = (List&lt;GuestbookEntry&gt;) q.getResultList();
@@ -617,7 +617,7 @@ public Result postIndex(GuestbookEntry guestbookEntry) {
 
     logger.info("In postRoute");        
 
-    EntityManager entityManager = entitiyManagerProvider.get();
+    EntityManager entityManager = entityManagerProvider.get();
 
     entityManager.persist(guestbookEntry);
 
